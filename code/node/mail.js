@@ -6,6 +6,7 @@ const KEY = process.env.KEY;
 const EMAIL = process.env.EMAIL;//服务器, 端口, 发送邮箱, 密码, 接收邮箱
 const arr = EMAIL.split(',');
 const port = parseInt(arr[1]);
+const reg = new RegExp(KEY, "i");
 
 // create reusable transporter object using the default SMTP transport
 const transporter = nodemailer.createTransport({
@@ -35,7 +36,7 @@ const rl = readline.createInterface({
 
 let canSend = true;
 rl.on('line', async (line) => {
-    if (canSend && line.includes(KEY)) {
+    if (canSend && reg.test(line)) {
         canSend = false;
         console.log(await transporter.sendMail(Object.assign(mailOptions, { subject: TITLE, text: line })));
     }
