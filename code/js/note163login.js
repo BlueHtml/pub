@@ -3,10 +3,9 @@ function delay(ms) {
 }
 
 async function main() {
-    const formNode = document.querySelector('#login form');
-    let submitNode;
-    while (null === (submitNode = formNode.querySelector('#loginbtn'))?.offsetParent) {
-        document.querySelector('#netease-login').click();
+    let formNode, submitNode;
+    while (!(formNode = document.querySelector('#login form')) || null === (submitNode = formNode.querySelector('#loginbtn'))?.offsetParent) {
+        document.querySelector('#netease-login')?.click();
         await delay(4000);
     }
     formNode.querySelector('#user').value = '@U';
