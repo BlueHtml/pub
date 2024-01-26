@@ -3,13 +3,14 @@ function delay(ms) {
 }
 
 async function main() {
-    const formNode = document.querySelector('form.login-left');
+    const formNode = document.querySelector('#login form');
     let submitNode;
-    while (null === (submitNode = formNode.querySelector('.login-btn'))?.offsetParent) {
+    while (null === (submitNode = formNode.querySelector('#loginbtn'))?.offsetParent) {
+        document.querySelector('#netease-login').click();
         await delay(4000);
     }
-    formNode.querySelector('.login-username').value = '@U';
-    formNode.querySelector('.login-password').value = '@P';
+    formNode.querySelector('#user').value = '@U';
+    formNode.querySelector('#pass').value = '@P';
     submitNode.click();
 }
 
